@@ -1,0 +1,1042 @@
+/* RabbitMap - Milanote-style Canvas */
+
+.rabbitmap-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: var(--background-secondary);
+}
+
+.rabbitmap-canvas {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image:
+		radial-gradient(circle, var(--background-modifier-border) 1px, transparent 1px);
+	background-size: 20px 20px;
+	cursor: default;
+}
+
+.rabbitmap-canvas.pan-mode,
+.rabbitmap-canvas.panning {
+	cursor: grab;
+}
+
+.rabbitmap-canvas.panning {
+	cursor: grabbing;
+}
+
+.rabbitmap-nodes {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transform-origin: 0 0;
+}
+
+/* Toolbar - vertical sidebar style */
+.rabbitmap-toolbar {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	padding: 8px;
+	background: var(--background-primary);
+	border-radius: 10px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+	align-items: center;
+}
+
+.rabbitmap-toolbar-separator {
+	width: 24px;
+	height: 1px;
+	background: var(--background-modifier-border);
+	margin: 4px 0;
+}
+
+.rabbitmap-btn {
+	padding: 6px;
+	border: none;
+	border-radius: 6px;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-size: 13px;
+	transition: all 0.15s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.rabbitmap-btn:hover {
+	background: var(--interactive-hover);
+	color: var(--text-normal);
+}
+
+.rabbitmap-btn-icon {
+	width: 36px;
+	height: 36px;
+	padding: 0;
+}
+
+.rabbitmap-btn-icon svg {
+	width: 18px;
+	height: 18px;
+}
+
+
+/* Nodes */
+.rabbitmap-node {
+	position: absolute;
+	background: var(--background-primary);
+	border-radius: 8px;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-node-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px 12px;
+	background: var(--background-secondary);
+	cursor: move;
+	user-select: none;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-node-title-container {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	min-width: 0;
+	flex: 1;
+}
+
+.rabbitmap-node-title {
+	font-weight: 500;
+	font-size: 13px;
+	color: var(--text-normal);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.rabbitmap-edit-title-btn {
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+	flex-shrink: 0;
+}
+
+.rabbitmap-node-header:hover .rabbitmap-edit-title-btn {
+	opacity: 1;
+}
+
+.rabbitmap-edit-title-btn:hover,
+.rabbitmap-export-btn:hover {
+	background: var(--interactive-hover);
+	color: var(--text-normal);
+}
+
+.rabbitmap-export-btn {
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+	flex-shrink: 0;
+}
+
+.rabbitmap-node-header:hover .rabbitmap-export-btn,
+.rabbitmap-node-header:hover .rabbitmap-expand-btn {
+	opacity: 1;
+}
+
+.rabbitmap-expand-btn {
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	border: none;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+	flex-shrink: 0;
+}
+
+.rabbitmap-expand-btn:hover {
+	background: var(--interactive-hover);
+	color: var(--text-normal);
+}
+
+/* Expanded Chat Modal */
+.rabbitmap-expanded-chat-modal {
+	width: 90vw;
+	max-width: 800px;
+	height: 80vh;
+}
+
+.rabbitmap-expanded-chat-modal .modal-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 0;
+}
+
+.rabbitmap-expanded-header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px 20px;
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-expanded-header h2 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.rabbitmap-expanded-model {
+	color: var(--text-muted);
+	font-size: 13px;
+}
+
+.rabbitmap-expanded-messages {
+	flex: 1;
+	overflow-y: auto;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.rabbitmap-expanded-message {
+	max-width: 80%;
+	padding: 12px 16px;
+	border-radius: 12px;
+	font-size: 14px;
+	line-height: 1.6;
+}
+
+.rabbitmap-expanded-user {
+	align-self: flex-end;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-bottom-right-radius: 4px;
+}
+
+.rabbitmap-expanded-assistant {
+	align-self: flex-start;
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	border-bottom-left-radius: 4px;
+}
+
+.rabbitmap-expanded-context {
+	font-size: 11px;
+	color: var(--text-on-accent-muted, rgba(255,255,255,0.7));
+	margin-bottom: 6px;
+	opacity: 0.8;
+}
+
+.rabbitmap-expanded-assistant .rabbitmap-expanded-context {
+	color: var(--text-muted);
+}
+
+.rabbitmap-expanded-content {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+.rabbitmap-expanded-input-area {
+	display: flex;
+	gap: 12px;
+	padding: 16px 20px;
+	border-top: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+}
+
+.rabbitmap-expanded-input {
+	flex: 1;
+	padding: 12px 16px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-family: inherit;
+	font-size: 14px;
+	resize: none;
+	min-height: 48px;
+}
+
+.rabbitmap-expanded-input:focus {
+	outline: none;
+	border-color: var(--interactive-accent);
+}
+
+.rabbitmap-expanded-send-btn {
+	padding: 12px 24px;
+	border: none;
+	border-radius: 8px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	cursor: pointer;
+	font-weight: 500;
+	font-size: 14px;
+	align-self: flex-end;
+}
+
+.rabbitmap-expanded-send-btn:hover {
+	opacity: 0.9;
+}
+
+.rabbitmap-expanded-loading .rabbitmap-expanded-content {
+	animation: rabbitmap-pulse 1.5s infinite;
+}
+
+.rabbitmap-expanded-input:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+.rabbitmap-title-input {
+	width: auto;
+	max-width: 150px;
+	padding: 4px 8px;
+	border: 1px solid var(--interactive-accent);
+	border-radius: 6px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-size: 13px;
+	font-weight: 500;
+	outline: none;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.rabbitmap-delete-btn {
+	width: 22px;
+	height: 22px;
+	padding: 0;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.rabbitmap-delete-btn:hover {
+	background: var(--background-modifier-error);
+	color: var(--text-on-accent);
+}
+
+.rabbitmap-node-content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+/* Resize handle */
+.rabbitmap-resize-handle {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 16px;
+	height: 16px;
+	cursor: nwse-resize;
+	opacity: 0;
+	transition: opacity 0.15s ease;
+}
+
+.rabbitmap-resize-handle::before {
+	content: "";
+	position: absolute;
+	right: 4px;
+	bottom: 4px;
+	width: 8px;
+	height: 8px;
+	border-right: 2px solid var(--text-muted);
+	border-bottom: 2px solid var(--text-muted);
+	border-radius: 0 0 2px 0;
+}
+
+.rabbitmap-node:hover .rabbitmap-resize-handle {
+	opacity: 1;
+}
+
+/* Minimap */
+.rabbitmap-minimap {
+	position: absolute;
+	right: 12px;
+	bottom: 12px;
+	width: 150px;
+	height: 100px;
+	background: var(--background-secondary);
+	border-radius: 6px;
+	border: 1px solid var(--background-modifier-border);
+	overflow: hidden;
+	z-index: 100;
+	cursor: pointer;
+	opacity: 0.6;
+	transition: opacity 0.15s ease;
+}
+
+.rabbitmap-minimap:hover {
+	opacity: 0.9;
+}
+
+.rabbitmap-minimap-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.rabbitmap-minimap-node {
+	position: absolute;
+	background: var(--text-muted);
+	border-radius: 1px;
+	min-width: 4px;
+	min-height: 3px;
+	opacity: 0.3;
+}
+
+.rabbitmap-minimap-node-chat {
+	opacity: 0.5;
+}
+
+.rabbitmap-minimap-viewport {
+	position: absolute;
+	border: 1px solid var(--text-muted);
+	border-radius: 1px;
+	background: var(--text-muted);
+	opacity: 0.1;
+	pointer-events: none;
+}
+
+/* Card styles */
+.rabbitmap-node-card .rabbitmap-node-content {
+	padding: 12px;
+}
+
+.rabbitmap-card-textarea {
+	flex: 1;
+	width: 100%;
+	padding: 8px;
+	border: none;
+	border-radius: 4px;
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1.5;
+	resize: none;
+}
+
+.rabbitmap-card-textarea:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px var(--interactive-accent);
+}
+
+/* Chat styles */
+.rabbitmap-node-chat {
+	min-width: 350px;
+	min-height: 400px;
+}
+
+.rabbitmap-chat-messages {
+	flex: 1;
+	overflow-y: auto;
+	padding: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.rabbitmap-chat-message {
+	max-width: 85%;
+	padding: 10px 14px;
+	border-radius: 12px;
+	font-size: 14px;
+	line-height: 1.5;
+	word-wrap: break-word;
+}
+
+.rabbitmap-chat-user {
+	align-self: flex-end;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-bottom-right-radius: 4px;
+}
+
+.rabbitmap-chat-assistant {
+	align-self: flex-start;
+	background: var(--background-secondary);
+	color: var(--text-normal);
+	border-bottom-left-radius: 4px;
+}
+
+/* Allow text selection in messages */
+.rabbitmap-chat-message {
+	user-select: text;
+	cursor: text;
+}
+
+/* Markdown content in assistant messages */
+.rabbitmap-message-content {
+	user-select: text;
+}
+
+.rabbitmap-message-content p {
+	margin: 0 0 8px 0;
+}
+
+.rabbitmap-message-content p:last-child {
+	margin-bottom: 0;
+}
+
+.rabbitmap-message-content h1,
+.rabbitmap-message-content h2,
+.rabbitmap-message-content h3,
+.rabbitmap-message-content h4 {
+	margin: 12px 0 8px 0;
+	font-weight: 600;
+}
+
+.rabbitmap-message-content h1:first-child,
+.rabbitmap-message-content h2:first-child,
+.rabbitmap-message-content h3:first-child {
+	margin-top: 0;
+}
+
+.rabbitmap-message-content ul,
+.rabbitmap-message-content ol {
+	margin: 8px 0;
+	padding-left: 20px;
+}
+
+.rabbitmap-message-content li {
+	margin: 4px 0;
+}
+
+.rabbitmap-message-content code {
+	background: var(--background-primary);
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 13px;
+}
+
+.rabbitmap-message-content pre {
+	background: var(--background-primary);
+	padding: 12px;
+	border-radius: 6px;
+	overflow-x: auto;
+	margin: 8px 0;
+}
+
+.rabbitmap-message-content pre code {
+	background: none;
+	padding: 0;
+}
+
+.rabbitmap-message-content blockquote {
+	border-left: 3px solid var(--interactive-accent);
+	margin: 8px 0;
+	padding-left: 12px;
+	color: var(--text-muted);
+}
+
+.rabbitmap-message-content strong {
+	font-weight: 600;
+}
+
+.rabbitmap-message-content a {
+	color: var(--interactive-accent);
+	text-decoration: none;
+}
+
+.rabbitmap-message-content a:hover {
+	text-decoration: underline;
+}
+
+.rabbitmap-chat-input-area {
+	display: flex;
+	gap: 8px;
+	padding: 12px;
+	border-top: 1px solid var(--background-modifier-border);
+	background: var(--background-secondary);
+}
+
+.rabbitmap-chat-input {
+	flex: 1;
+	padding: 10px 12px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-family: inherit;
+	font-size: 14px;
+	resize: none;
+	min-height: 40px;
+	max-height: 120px;
+}
+
+.rabbitmap-chat-input:focus {
+	outline: none;
+	border-color: var(--interactive-accent);
+}
+
+.rabbitmap-send-btn {
+	padding: 10px 16px;
+	border: none;
+	border-radius: 8px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	cursor: pointer;
+	font-weight: 500;
+	font-size: 14px;
+	transition: opacity 0.15s ease;
+}
+
+.rabbitmap-send-btn:hover {
+	opacity: 0.9;
+}
+
+/* Scrollbar styling */
+.rabbitmap-chat-messages::-webkit-scrollbar {
+	width: 6px;
+}
+
+.rabbitmap-chat-messages::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.rabbitmap-chat-messages::-webkit-scrollbar-thumb {
+	background: var(--background-modifier-border);
+	border-radius: 3px;
+}
+
+.rabbitmap-chat-messages::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+/* Chat selector bar */
+.rabbitmap-chat-selector-bar {
+	display: flex;
+	gap: 8px;
+	padding: 8px 12px;
+	background: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-select {
+	padding: 6px 10px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-size: 12px;
+	cursor: pointer;
+	outline: none;
+}
+
+.rabbitmap-select:hover {
+	border-color: var(--interactive-accent);
+}
+
+.rabbitmap-select:focus {
+	border-color: var(--interactive-accent);
+	box-shadow: 0 0 0 2px rgba(var(--interactive-accent-rgb), 0.2);
+}
+
+.rabbitmap-model-select {
+	flex: 1;
+	min-width: 0;
+}
+
+/* Context section */
+.rabbitmap-chat-context {
+	padding: 8px 12px;
+	background: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-chat-context-header {
+	display: flex;
+	align-items: center;
+	margin-bottom: 6px;
+}
+
+.rabbitmap-chat-context-title {
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	letter-spacing: 0.5px;
+}
+
+.rabbitmap-chat-context-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+.rabbitmap-chat-context-item {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 8px;
+	background: var(--background-primary);
+	border-radius: 4px;
+	font-size: 12px;
+	border: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-chat-context-filename {
+	color: var(--text-normal);
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.rabbitmap-chat-context-remove {
+	padding: 0;
+	width: 16px;
+	height: 16px;
+	border: none;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 2px;
+}
+
+.rabbitmap-chat-context-remove:hover {
+	background: var(--background-modifier-error);
+	color: var(--text-on-accent);
+}
+
+.rabbitmap-chat-context-placeholder {
+	color: var(--text-faint);
+	font-size: 12px;
+	font-style: italic;
+	padding: 4px 0;
+}
+
+/* Drag over state */
+.rabbitmap-drag-over {
+	outline: 2px dashed var(--interactive-accent);
+	outline-offset: -2px;
+	background: rgba(var(--interactive-accent-rgb), 0.05);
+}
+
+/* Loading animation */
+.rabbitmap-chat-loading span {
+	display: inline-block;
+	animation: rabbitmap-pulse 1.5s infinite;
+}
+
+@keyframes rabbitmap-pulse {
+	0%, 100% { opacity: 0.3; }
+	50% { opacity: 1; }
+}
+
+/* Settings modal */
+.rabbitmap-settings-modal {
+	padding: 20px;
+}
+
+.rabbitmap-settings-modal h2 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+.rabbitmap-settings-info {
+	margin-top: 20px;
+	margin-bottom: 8px;
+	color: var(--text-muted);
+	font-size: 13px;
+}
+
+.rabbitmap-settings-links {
+	font-size: 13px;
+}
+
+.rabbitmap-settings-links a {
+	color: var(--interactive-accent);
+	text-decoration: none;
+}
+
+.rabbitmap-settings-links a:hover {
+	text-decoration: underline;
+}
+
+/* Edit Prompt button */
+.rabbitmap-edit-prompt-btn {
+	padding: 4px 8px;
+	font-size: 11px;
+	white-space: nowrap;
+}
+
+/* Prompt Editor Modal */
+.rabbitmap-prompt-modal {
+	padding: 16px;
+}
+
+.rabbitmap-prompt-modal h3 {
+	margin: 0 0 12px 0;
+}
+
+.rabbitmap-prompt-textarea {
+	width: 100%;
+	min-height: 200px;
+	padding: 10px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-family: inherit;
+	font-size: 14px;
+	resize: vertical;
+}
+
+.rabbitmap-prompt-textarea:focus {
+	outline: none;
+	border-color: var(--interactive-accent);
+}
+
+.rabbitmap-prompt-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 12px;
+}
+
+h3.rabbitmap-prompt-section-title,
+h4.rabbitmap-prompt-section-title {
+	margin-top: 24px !important;
+	margin-bottom: 8px !important;
+	font-size: 14px;
+}
+
+.rabbitmap-prompt-hint {
+	margin: 0 0 8px 0;
+	font-size: 12px;
+	color: var(--text-muted);
+}
+
+.rabbitmap-template-textarea {
+	min-height: 80px;
+	font-family: var(--font-monospace);
+	font-size: 13px;
+}
+
+.rabbitmap-prompt-preview {
+	padding: 10px;
+	background: var(--background-secondary);
+	border-radius: 6px;
+	font-family: var(--font-monospace);
+	font-size: 12px;
+	color: var(--text-muted);
+	white-space: pre-wrap;
+	max-height: 100px;
+	overflow-y: auto;
+}
+
+/* Selection box */
+.rabbitmap-selection-box {
+	position: absolute;
+	border: 2px solid var(--interactive-accent);
+	background: rgba(var(--interactive-accent-rgb), 0.1);
+	pointer-events: none;
+	z-index: 50;
+}
+
+/* Selected node */
+.rabbitmap-node-selected {
+	box-shadow: 0 0 0 2px var(--interactive-accent), 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Edges */
+.rabbitmap-edges {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	overflow: visible;
+	transform-origin: 0 0;
+}
+
+.rabbitmap-edge {
+	fill: none;
+	stroke: #888;
+	stroke-width: 3;
+}
+
+.rabbitmap-arrow {
+	fill: #888;
+}
+
+/* OpenRouter Models Settings */
+.rabbitmap-models-input-row {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.rabbitmap-models-input {
+	flex: 1;
+	padding: 8px 12px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-size: 14px;
+}
+
+.rabbitmap-models-input:focus {
+	outline: none;
+	border-color: var(--interactive-accent);
+}
+
+.rabbitmap-models-add-btn {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 6px;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	cursor: pointer;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.rabbitmap-models-add-btn:hover {
+	opacity: 0.9;
+}
+
+.rabbitmap-models-list {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	margin-bottom: 16px;
+}
+
+.rabbitmap-models-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 12px;
+	background: var(--background-secondary);
+	border-radius: 6px;
+	border: 1px solid var(--background-modifier-border);
+}
+
+.rabbitmap-models-name {
+	font-size: 13px;
+	color: var(--text-normal);
+	font-family: var(--font-monospace);
+}
+
+.rabbitmap-models-remove-btn {
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--text-muted);
+	cursor: pointer;
+	font-size: 18px;
+	line-height: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.rabbitmap-models-remove-btn:hover {
+	background: var(--background-modifier-error);
+	color: var(--text-on-accent);
+}
+
+.rabbitmap-models-empty {
+	color: var(--text-muted);
+	font-size: 13px;
+	font-style: italic;
+	padding: 8px 0;
+}
+
+/* About section in settings */
+.rabbitmap-about-section {
+	padding: 12px 16px;
+	margin-bottom: 16px;
+	background: var(--background-secondary);
+	border-radius: 8px;
+	border-left: 3px solid var(--interactive-accent);
+}
+
+.rabbitmap-about-section p {
+	margin: 0 0 8px 0;
+	font-size: 13px;
+	line-height: 1.5;
+	color: var(--text-muted);
+}
+
+.rabbitmap-about-section p:last-child {
+	margin-bottom: 0;
+}
+
+.rabbitmap-about-section a {
+	color: var(--interactive-accent);
+	text-decoration: none;
+}
+
+.rabbitmap-about-section a:hover {
+	text-decoration: underline;
+}
+
