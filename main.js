@@ -1768,7 +1768,22 @@ ${msg.content}
     }
     const data = await response.json();
     if (data.candidates && ((_b = (_a = data.candidates[0]) == null ? void 0 : _a.content) == null ? void 0 : _b.parts)) {
-      return data.candidates[0].content.parts.map((part) => part.text).join("");
+      const parts = data.candidates[0].content.parts;
+      const resultParts = [];
+      for (const part of parts) {
+        if (part.text) {
+          resultParts.push(part.text);
+        } else if (part.inlineData) {
+          const { mimeType, data: base64Data } = part.inlineData;
+          const dataUrl = `data:${mimeType};base64,${base64Data}`;
+          resultParts.push(`
+
+![Generated Image](${dataUrl})
+
+`);
+        }
+      }
+      return resultParts.join("") || "No response";
     }
     return "No response";
   }

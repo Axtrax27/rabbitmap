@@ -2322,11 +2322,24 @@ class RabbitMapView extends TextFileView {
 		}
 
 		const data = await response.json();
-		// Google returns candidates array
+		// Google returns candidates array with parts that can be text or inlineData (images)
 		if (data.candidates && data.candidates[0]?.content?.parts) {
-			return data.candidates[0].content.parts
-				.map((part: { text: string }) => part.text)
-				.join("");
+			const parts = data.candidates[0].content.parts;
+			const resultParts: string[] = [];
+
+			for (const part of parts) {
+				if (part.text) {
+					// Text content
+					resultParts.push(part.text);
+				} else if (part.inlineData) {
+					// Image content - convert to Markdown data URL
+					const { mimeType, data: base64Data } = part.inlineData;
+					const dataUrl = `data:${mimeType};base64,${base64Data}`;
+					resultParts.push(`\n\n![Generated Image](${dataUrl})\n\n`);
+				}
+			}
+
+			return resultParts.join("") || "No response";
 		}
 		return "No response";
 	}
