@@ -1562,11 +1562,13 @@ ${msg.content}
       const provider = this.plugin.settings.providers.find((p) => p.name === chatState.provider);
       if (!provider)
         return;
-      let apiKey = "";
-      if (chatState.provider === "OpenAI") {
-        apiKey = this.plugin.settings.openaiApiKey;
-      } else if (chatState.provider === "OpenRouter") {
-        apiKey = this.plugin.settings.openrouterApiKey;
+      let apiKey = provider.apiKey || "";
+      if (!apiKey) {
+        if (chatState.provider === "OpenAI" && this.plugin.settings.openaiApiKey) {
+          apiKey = this.plugin.settings.openaiApiKey;
+        } else if (chatState.provider === "OpenRouter" && this.plugin.settings.openrouterApiKey) {
+          apiKey = this.plugin.settings.openrouterApiKey;
+        }
       }
       if (!apiKey) {
         const errorMsg = {
